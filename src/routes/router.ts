@@ -4,9 +4,10 @@ import { createUserSchema } from "../schema/user.schema";
 import { createUserHandler } from "../controllers/user.controller";
 import {
   createUserSessionHandler,
-  getUserSessionHandler,
+  getUserSessionsHandler,
 } from "../controllers/session.controller";
 import { createSessionSchema } from "../schema/session.schema";
+import requireUser from "../middlewares/requireUser";
 
 function routers(app: Express) {
   app.get("/healthcheck", (req: Request, res: Response) => {
@@ -24,7 +25,7 @@ function routers(app: Express) {
     createUserSessionHandler
   );
 
-  app.get("/api/user/session", getUserSessionHandler);
+  app.get("/api/user/sessions", requireUser, getUserSessionsHandler);
 }
 
 export default routers;
