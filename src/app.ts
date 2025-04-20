@@ -1,20 +1,18 @@
 import express from "express";
+import log from "../logger/logger";
 import config from "config";
-import logger from "./utils/logger";
-import connect from "./utils/connect";
-import routers from "./routes/router";
-import deserializeUser from "./middlewares/deserializeUser";
+import connect from "./database/connect";
+import route from "./route";
 
-const port = config.get<number>("port");
-const host = config.get<string>("host");
+const port = config.get("port") as string;
+const host = config.get("host") as string;
 
 const app = express();
 app.use(express.json());
-app.use(deserializeUser);
 
 app.listen(port, async () => {
-  logger.info(`server is running on http://${host}:${port}`);
+  log.info(`Server is running on http://${host}:${port}`);
   await connect();
 
-  routers(app);
+  route(app);
 });

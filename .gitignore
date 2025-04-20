@@ -1,8 +1,0 @@
-.env 
-node_moudules
-dist
-.DS_Store
-.vscode
-*.log
-*.env
-*.local
