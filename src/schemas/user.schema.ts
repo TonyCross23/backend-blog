@@ -3,7 +3,7 @@ import { object, string, TypeOf } from "zod";
 export const createUserSchema = object({
   body: object({
     name: string({
-      required_error: "name is required",
+      required_error: "Name is required",
     }),
     email: string({
       required_error: "Email is required",

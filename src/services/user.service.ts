@@ -1,4 +1,5 @@
-import UserModel, { UserInput } from "../models/user.model";
+import { FilterQuery } from "mongoose";
+import UserModel, { UserDocument, UserInput } from "../models/user.model";
 
 export const createUser = async (input: UserInput) => {
   try {
@@ -27,4 +28,8 @@ export const validatePassword = async ({
   if (!isValid) return false;
 
   return user.toJSON();
+};
+
+export const findUser = async (query: FilterQuery<UserDocument>) => {
+  return UserModel.findOne(query).lean();
 };

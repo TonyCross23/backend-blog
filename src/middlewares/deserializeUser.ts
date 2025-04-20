@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { get } from "lodash";
 import { verifyJWT } from "../utils/jwt.util";
+import { reIssueAccessToken } from "../services/session.service";
 
 const deserializeUser = async (
   req: Request,
@@ -12,15 +13,32 @@ const deserializeUser = async (
     ""
   );
 
+  const refreshToken = get(req, "headers.x-refresh");
+
   if (!accessToken) {
     return next();
   }
 
   const { decoded, expired } = verifyJWT(accessToken);
-  console.log("decoded", decoded);
 
   if (decoded) {
     res.locals.user = decoded;
+    return next();
+  }
+
+  if (expired && refreshToken) { 
+     let newAccessToken;
+     if (typeof refreshToken === "string") {
+       newAccessToken = await reIssueAccessToken({ refreshToken });
+     }
+    
+     if (newAccessToken) {
+        res.setHeader("x-access-token", newAccessToken  as string);
+    }
+
+    const result = verifyJWT(newAccessToken as string);
+
+    res.locals.user = result.decoded;
     return next();
   }
 
