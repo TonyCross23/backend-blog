@@ -17,6 +17,11 @@ export const signJwt = (
 export const verifyJWT = (token: string) => {
   try {
     const decoded = jwt.verify(token, publicKey);
+    return {
+      valid: true,
+      expired: false,
+      decoded,
+    };
   } catch (e: any) {
     return {
       valid: false,
