@@ -9,9 +9,6 @@ const payload = {
     content: string({
       required_error: "Content is required",
     }),
-    image: string({
-      required_error: "Image is required",
-    }),
   })
 }
 

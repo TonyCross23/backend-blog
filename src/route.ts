@@ -11,6 +11,7 @@ import {
 import { createSessionSchema } from "./schemas/session.schema";
 import requireUser from "./middlewares/requireUser";
 import { createBlogSchema } from './schemas/blog.schema';
+import upload from './utils/cloudinaryStorage';
 
 const route = (app: Express) => {
   app.get("/healthcheck", (req: Request, res: Response) => {
@@ -33,7 +34,7 @@ const route = (app: Express) => {
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
   //blog
-  app.post("/api/blog", [requireUser,validateRequest(createBlogSchema)], createBlogHandler);
+  app.post("/api/blog", upload.single('image'), [requireUser,validateRequest(createBlogSchema)], createBlogHandler);
 };
 
 export default route;
