@@ -12,17 +12,23 @@ const payload = {
   })
 }
 
-//const params = object({
-//  params: object({
-//    blogId: string({
-//      required_error: "Blog id is required",
-//    }),
-//  }),
-//});
+const params = object({
+  params: object({
+    blogId: string({
+      required_error: "Blog id is required",
+    }),
+  }),
+});
 
 
 export const createBlogSchema = object({
   ...payload,
 });
 
+export const updateBlogSchema = object({
+  body: payload.body,
+  params: params.shape.params,
+});
+
 export type CreateBlogInput = TypeOf<typeof createBlogSchema>;
+export type UpdateBlogInput = TypeOf<typeof updateBlogSchema>;

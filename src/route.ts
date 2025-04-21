@@ -1,4 +1,4 @@
-import { createBlogHandler } from './controllers/blog.controller';
+import { createBlogHandler, findBlogByIdHandler, getAllBlogsHandler } from './controllers/blog.controller';
 import { Express, Request, Response } from "express";
 import validateRequest from "./middlewares/validateRequest";
 import { createUserSchema } from "./schemas/user.schema";
@@ -34,7 +34,9 @@ const route = (app: Express) => {
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
   //blog
-  app.post("/api/blog", upload.single('image'), [requireUser,validateRequest(createBlogSchema)], createBlogHandler);
+  app.post("/api/blog", upload.single('image'), [requireUser, validateRequest(createBlogSchema)], createBlogHandler);
+  app.get("/api/blogs", getAllBlogsHandler);
+  app.get("/api/blog/:blogId", findBlogByIdHandler);
 };
 
 export default route;
