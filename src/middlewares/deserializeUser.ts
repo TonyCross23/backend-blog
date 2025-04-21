@@ -28,9 +28,9 @@ const deserializeUser = async (
 
   if (expired && refreshToken) { 
      let newAccessToken;
-     if (typeof refreshToken === "string") {
-       newAccessToken = await reIssueAccessToken({ refreshToken });
-     }
+       if (typeof refreshToken === "string") {
+         newAccessToken = await reIssueAccessToken({ refreshToken });
+       }
     
      if (newAccessToken) {
         res.setHeader("x-access-token", newAccessToken  as string);

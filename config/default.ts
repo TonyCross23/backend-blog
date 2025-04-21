@@ -3,7 +3,7 @@ export default {
   host: "localhost",
   dbUri: "mongodb://localhost:27017/blog-app",
   saltWorkFactor: 10,
-  accessTokenTtl: "15m",
+  accessTokenTtl: "3d",
   refreshTokenTtl: "1y",
   privateKey: `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/4J2CnOLMe6E/
