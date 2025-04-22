@@ -1,4 +1,4 @@
-import { createBlogHandler, findBlogByIdHandler, getAllBlogsHandler } from './controllers/blog.controller';
+import { createBlogHandler, deleteBlogHandler, findBlogByIdHandler, getAllBlogsHandler, updateBlogHandler } from './controllers/blog.controller';
 import { Express, Request, Response } from "express";
 import validateRequest from "./middlewares/validateRequest";
 import { createUserSchema } from "./schemas/user.schema";
@@ -10,7 +10,7 @@ import {
 } from "./controllers/session.controller";
 import { createSessionSchema } from "./schemas/session.schema";
 import requireUser from "./middlewares/requireUser";
-import { createBlogSchema } from './schemas/blog.schema';
+import { createBlogSchema, deleteProductSchema, updateBlogSchema } from './schemas/blog.schema';
 import upload from './utils/cloudinaryStorage';
 
 const route = (app: Express) => {
@@ -37,6 +37,8 @@ const route = (app: Express) => {
   app.post("/api/blog", upload.single('image'), [requireUser, validateRequest(createBlogSchema)], createBlogHandler);
   app.get("/api/blogs", getAllBlogsHandler);
   app.get("/api/blog/:blogId", findBlogByIdHandler);
+  app.put("/api/blog/:blogId", upload.single('image'), [requireUser, validateRequest(updateBlogSchema)], updateBlogHandler);
+  app.delete("/api/blog/:blogId", requireUser, validateRequest(deleteProductSchema), deleteBlogHandler);
 };
 
 export default route;

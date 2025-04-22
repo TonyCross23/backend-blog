@@ -30,5 +30,10 @@ export const updateBlogSchema = object({
   params: params.shape.params,
 });
 
+export const deleteProductSchema = object({
+  ...params.shape,
+});
+
 export type CreateBlogInput = TypeOf<typeof createBlogSchema>;
 export type UpdateBlogInput = TypeOf<typeof updateBlogSchema>;
+export type DeleteBlogInput = TypeOf<typeof deleteProductSchema>;
