@@ -34,7 +34,7 @@ const route = (app: Express) => {
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
   //blog
-  app.post("/api/blog", upload.single('image'), [requireUser, validateRequest(createBlogSchema)], createBlogHandler);
+  app.post("/api/blog",requireUser, upload.single('image'), validateRequest(createBlogSchema), createBlogHandler);
   app.get("/api/blogs", getAllBlogsHandler);
   app.get("/api/blog/:blogId", findBlogByIdHandler);
   app.put("/api/blog/:blogId", upload.single('image'), [requireUser, validateRequest(updateBlogSchema)], updateBlogHandler);

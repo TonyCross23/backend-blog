@@ -7,6 +7,7 @@ export interface BlogInput {
   title: string;
   content: string;
   image: string;
+  blogId?: string;
 }
 
 export interface BlogDocument extends BlogInput, mongoose.Document {
