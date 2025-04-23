@@ -55,7 +55,7 @@ describe("blog", () => {
       })
     })
   })
-  
+
   describe('get all blogs route', () => {
     it("should return a 200 status and an array of blogs", async () => {
       const { body, statusCode } = await supertest(app).get('/api/blogs').expect(200)
@@ -73,9 +73,8 @@ describe("blog", () => {
         expect(statusCode).toBe(403)
       })
      })
-  })
-  
-  describe.skip("given the user is logged in", () => { 
+
+    describe.skip("given the user is logged in", () => { 
     it("should return a 201 status and the created blog", async () => { 
       const jwt = signJwt(userPayload)
 
@@ -96,6 +95,7 @@ describe("blog", () => {
           user: expect.any(String),
       })
     })
+  })
   })
 
 })
