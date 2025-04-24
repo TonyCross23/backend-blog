@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { CreateBlogInput, UpdateBlogInput } from "../schemas/blog.schema";
 import { createBlog } from "../services/blog.service";
 import cloudinary from '../utils/cloudinary';
+import { log } from 'console';
 
 
 export const createBlogHandler = async (req: Request<{}, {}, CreateBlogInput['body'] & { file?: Express.Multer.File }>, res: Response): Promise<void> => {
@@ -24,8 +25,9 @@ export const createBlogHandler = async (req: Request<{}, {}, CreateBlogInput['bo
   };
 
   const blog = await createBlog(newPost);
-
-  res.status(201).send(blog);
+  console.log("Blog created:", blog);
+  
+  res.status(200).send(blog);
 }
 
 export const getAllBlogsHandler = async (req: Request, res: Response): Promise<void> => {
