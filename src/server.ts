@@ -1,7 +1,7 @@
-import express from 'express';
-import deserializeUser from './middlewares/deserializeUser';
-import route from './route';
-import { startMetricsServer } from './metrics';
+import express from "express";
+import deserializeUser from "./middlewares/deserializeUser";
+import route from "./route";
+import { startMetricsServer } from "./metrics";
 
 function createServer() {
   const app = express();
@@ -10,6 +10,7 @@ function createServer() {
   app.use(deserializeUser);
   route(app);
   startMetricsServer();
+
   return app;
 }
 
