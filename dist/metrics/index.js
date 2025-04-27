@@ -7,7 +7,7 @@ exports.databaseResponseTimeHistogram = exports.restResponseTimeHistogram = void
 exports.startMetricsServer = startMetricsServer;
 const express_1 = __importDefault(require("express"));
 const prom_client_1 = __importDefault(require("prom-client"));
-const logger_1 = __importDefault(require("../../logger/logger"));
+const logger_1 = __importDefault(require("../logger/logger"));
 const app = (0, express_1.default)();
 exports.restResponseTimeHistogram = new prom_client_1.default.Histogram({
     name: "rest_response_time_duration_seconds",
@@ -22,11 +22,14 @@ exports.databaseResponseTimeHistogram = new prom_client_1.default.Histogram({
 function startMetricsServer() {
     const collectDefaultMetrics = prom_client_1.default.collectDefaultMetrics;
     collectDefaultMetrics();
-    app.get('/metrics', (req, res) => {
-        res.set('Content-Type', prom_client_1.default.register.contentType);
-        prom_client_1.default.register.metrics().then(metrics => {
+    app.get("/metrics", (req, res) => {
+        res.set("Content-Type", prom_client_1.default.register.contentType);
+        prom_client_1.default.register
+            .metrics()
+            .then((metrics) => {
             res.send(metrics);
-        }).catch(err => {
+        })
+            .catch((err) => {
             res.status(500).send(err.message);
         });
     });

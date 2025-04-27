@@ -1,5 +1,5 @@
 import config from "config";
-import log from "../../logger/logger";
+import log from "../logger/logger";
 import mongoose from "mongoose";
 
 const connect = async () => {

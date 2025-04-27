@@ -12,18 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const config_1 = __importDefault(require("config"));
-const logger_1 = __importDefault(require("../../logger/logger"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const connect = () => __awaiter(void 0, void 0, void 0, function* () {
-    const dbUri = config_1.default.get("dbUri");
+exports.createUserHandler = void 0;
+const logger_1 = __importDefault(require("../logger/logger"));
+const user_service_1 = require("../services/user.service");
+const createUserHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(dbUri);
-        logger_1.default.info("connected database");
+        const user = yield (0, user_service_1.createUser)(req.body);
+        res.send(user);
     }
-    catch (error) {
-        logger_1.default.error("Could not connect to db");
-        process.exit(1);
+    catch (e) {
+        logger_1.default.error(e);
+        res.status(409).json(e.message);
     }
 });
-exports.default = connect;
+exports.createUserHandler = createUserHandler;

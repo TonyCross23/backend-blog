@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const package_json_1 = require("../../package.json");
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-const logger_1 = __importDefault(require("../../logger/logger"));
+const logger_1 = __importDefault(require("../logger/logger"));
 const options = {
     definition: {
         openapi: "3.0.0",

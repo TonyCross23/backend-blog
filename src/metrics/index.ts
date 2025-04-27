@@ -1,6 +1,6 @@
-import express, { Request, Response } from 'express';
-import client from 'prom-client';
-import log from '../../logger/logger';
+import express, { Request, Response } from "express";
+import client from "prom-client";
+import log from "../logger/logger";
 
 const app = express();
 
@@ -21,14 +21,17 @@ export function startMetricsServer() {
 
   collectDefaultMetrics();
 
-  app.get('/metrics', (req: Request, res: Response) => { 
-    res.set('Content-Type', client.register.contentType);
+  app.get("/metrics", (req: Request, res: Response) => {
+    res.set("Content-Type", client.register.contentType);
 
-    client.register.metrics().then(metrics => {
-      res.send(metrics);
-    }).catch(err => {
-      res.status(500).send(err.message);
-    });
+    client.register
+      .metrics()
+      .then((metrics) => {
+        res.send(metrics);
+      })
+      .catch((err) => {
+        res.status(500).send(err.message);
+      });
   });
 
   app.listen(9100, () => {
