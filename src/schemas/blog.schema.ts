@@ -1,6 +1,45 @@
 import { object, string, TypeOf } from "zod";
 
-
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Blog:
+ *       type: object
+ *       required:
+ *        - title
+ *        - content
+ *        - image
+ *       properties:
+ *        title:
+ *         type: string
+ *         default: My first blog
+ *        content:
+ *         type: string
+ *         default: This is my first blog content
+ *        image:
+ *         type: string
+ *         default: https://example.com/image.jpg
+ *     blogResponse:
+ *         user:
+ *          type: string
+ *         _id:
+ *          type: string
+ *         title:
+ *          type: string
+ *         content:
+ *          type: string
+ *         image:
+ *          type: string
+ *         blogId:
+ *          type: string
+ *         createdAt:
+ *          type: string
+ *         updatedAt:
+ *          type: string
+ *         __v:
+ *          type: number
+ */
 const payload = {
   body: object({
     title: string({
@@ -9,8 +48,8 @@ const payload = {
     content: string({
       required_error: "Content is required",
     }),
-  })
-}
+  }),
+};
 
 const params = object({
   params: object({
@@ -19,7 +58,6 @@ const params = object({
     }),
   }),
 });
-
 
 export const createBlogSchema = object({
   ...payload,

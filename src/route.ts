@@ -124,7 +124,38 @@ const route = (app: Express) => {
   app.get("/api/user/sessions", requireUser, getUserSessionHandler);
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
-  //blog
+  /**
+   * @openapi
+   * '/api/blog':
+   *  post:
+   *   tags:
+   *   - Blog
+   *   summary: Create new blog
+   *   requestBody:
+   *     required: true
+   *     content:
+   *       application/json:
+   *         schema:
+   *           $ref: '#/components/schemas/Blog'
+   *   responses:
+   *     200:
+   *       description: Blog created
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/blogResponse'
+   *           examples:
+   *             "user": "642a0de05f16e6dad68efdad"
+   *             "title": "Canon EOS 1500D DSLR Camera with 18-55mm Lens"
+   *             "description": "Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go."
+   *             "price": 879.99
+   *             "image": "https://i.imgur.com/QlRphfQ.jpg"
+   *             "_id": "642a1cfcc1bec76d8a2e7ac2"
+   *             "productId": "product_xxqm8z3eho"
+   *             "createdAt": "2023-04-03T00:25:32.189Z"
+   *             "updatedAt": "2023-04-03T00:25:32.189Z"
+   *             "__v": 0
+   */
   app.post(
     "/api/blog",
     requireUser,
@@ -132,7 +163,91 @@ const route = (app: Express) => {
     validateRequest(createBlogSchema),
     createBlogHandler
   );
+
+  /**
+   * @openapi
+   * /api/blogs:
+   *   get:
+   *     tags:
+   *       - Blog
+   *     summary: Get all blogs
+   *     responses:
+   *       200:
+   *         description: List of blogs
+   *         content:
+   *           application/json:
+   *             schema:
+   *               items:
+   *                 $ref: '#/components/schemas/Blog'
+   */
   app.get("/api/blogs", getAllBlogsHandler);
+
+  /**
+   * @openapi
+   * '/api/blog/{blogId}':
+   *  get:
+   *   tags:
+   *   - Blog
+   *   summary: Get blog by id
+   *   parameters:
+   *     - name: blogId
+   *       in: path
+   *       description: The id of the blog
+   *       required: true
+   *   responses:
+   *     200:
+   *       description: Success
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/blogResponse'
+   *     404:
+   *       description: Blog not found
+   *  put:
+   *   tags:
+   *   - Blog
+   *   summary: Update blog by id
+   *   parameters:
+   *     - name: blogId
+   *       in: path
+   *       description: The id of the blog
+   *       required: true
+   *   requestBody:
+   *     required: true
+   *     content:
+   *       application/json:
+   *         schema:
+   *           $ref: '#/components/schemas/Blog'
+   *   responses:
+   *     200:
+   *       description: Blog updated
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/blogResponse'
+   *     404:
+   *       description: Blog not found
+   *     403:
+   *       description: Forbidden
+   *  delete:
+   *   tags:
+   *   - Blog
+   *   summary: Delete blog by id
+   *   parameters:
+   *     - name: blogId
+   *       in: path
+   *       description: The id of the blog
+   *       required: true
+   *   responses:
+   *     200:
+   *       description: Blog deleted
+   *     404:
+   *       description: Blog not found
+   *     403:
+   *       description: Forbidden
+   *     400:
+   *       description: Bad request
+   */
   app.get("/api/blog/:blogId", findBlogByIdHandler);
   app.put(
     "/api/blog/:blogId",
