@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = __importDefault(require("./logger/logger"));
-const config_1 = __importDefault(require("config"));
+const default_1 = __importDefault(require("./config/default"));
 const connect_1 = __importDefault(require("./database/connect"));
 const server_1 = __importDefault(require("./server"));
 const metrics_1 = require("./metrics");
 const response_time_1 = __importDefault(require("response-time"));
 const swagger_1 = __importDefault(require("./swagger/swagger"));
-const port = config_1.default.get("port");
-const host = config_1.default.get("host");
+const port = default_1.default.port.toString();
+const host = default_1.default.host;
 const app = (0, server_1.default)();
 app.use((0, response_time_1.default)((req, res, time) => {
     var _a;

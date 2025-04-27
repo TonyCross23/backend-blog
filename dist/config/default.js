@@ -1,14 +1,18 @@
-import dotenv from "dotenv";
-dotenv.config();
-
-export default {
-  port: 1337,
-  host: "localhost",
-  dbUri: process.env.DB_URI,
-  saltWorkFactor: 10,
-  accessTokenTtl: "3d",
-  refreshTokenTtl: "1y",
-  privateKey: `-----BEGIN PRIVATE KEY-----
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const config = {
+    port: 1337,
+    host: "localhost",
+    dbUri: process.env.DB_URI,
+    saltWorkFactor: 10,
+    accessTokenTtl: "3d",
+    refreshTokenTtl: "1y",
+    privateKey: `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/4J2CnOLMe6E/
 vH6TLxlanj7uOIjyjrmkHcgNsRqg3v7jDk2AjRWjIPEJseDXuoAsc/V4eI7l5lEH
 Fy71lwv7k+wK3Xl/XLOj2NVX90Jw89IfEuPEz1mThQ44VBk84lMdF1NKrtTR6HMu
@@ -37,7 +41,7 @@ d/kysSARM9MTV7cPkQoBZCW8DyTSEuN8nawT3SImL3MLLXxiHcRpgPQeDf7cxG3p
 PQ6hkPls9SQA6alTL2tzt/A=
 -----END PRIVATE KEY-----
 `,
-  publicKey: `-----BEGIN PUBLIC KEY-----
+    publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv+CdgpzizHuhP7x+ky8Z
 Wp4+7jiI8o65pB3IDbEaoN7+4w5NgI0VoyDxCbHg17qALHP1eHiO5eZRBxcu9ZcL
 +5PsCt15f1yzo9jVV/dCcPPSHxLjxM9Zk4UOOFQZPOJTHRdTSq7U0ehzLlM3TkPl
@@ -48,3 +52,4 @@ VQIDAQAB
 -----END PUBLIC KEY-----
 `,
 };
+exports.default = config;

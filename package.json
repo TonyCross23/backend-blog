@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "tsc && cp -r config dist/config",
+    "dev": "SUPPRESS_NO_CONFIG_WARNING=true ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "tsc",
     "test": "jest --detectOpenHandles",
-    "start": "node dist/app.js"
+    "start": "SUPPRESS_NO_CONFIG_WARNING=true node dist/app.js"
   },
   "keywords": [],
   "author": "",

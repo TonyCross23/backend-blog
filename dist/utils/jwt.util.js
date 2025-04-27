@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyJWT = exports.signJwt = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const config_1 = __importDefault(require("config"));
-const privateKey = config_1.default.get("privateKey");
-const publicKey = config_1.default.get("publicKey");
+const default_1 = __importDefault(require("../config/default"));
+const privateKey = default_1.default.privateKey;
+const publicKey = default_1.default.publicKey;
 const signJwt = (object, options) => {
     return jsonwebtoken_1.default.sign(object, privateKey, Object.assign(Object.assign({}, options), { algorithm: "RS256" }));
 };
