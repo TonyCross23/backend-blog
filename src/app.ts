@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express";
 import log from "./logger/logger";
-import config from "./config/default";
+import config from "config";
 import connect from "./database/connect";
 import createServer from "./server";
 import { restResponseTimeHistogram } from "./metrics";
 import responseTime from "response-time";
 import swaggerDocs from "./swagger/swagger";
 
-const port = config.port.toString();
-const host = config.host;
+const port = config.get("port") as string;
+const host = config.get("host") as string;
 
 const app = createServer();
 

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const config = {
+export default {
   port: 1337,
   host: "localhost",
   dbUri: process.env.DB_URI,
@@ -48,5 +48,3 @@ VQIDAQAB
 -----END PUBLIC KEY-----
 `,
 };
-
-export default config;
